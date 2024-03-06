@@ -10,27 +10,19 @@ In this personal project, we will focus on IMU-based indoor tracking for wheeled
 The dataset contains four parts: Training Set, Validation Set, Test Seen Set, and Test Unseen Set. We will give you the raw data and ground truth of the Training Set and Validation Set for training the model. Only raw data from the Test Seen Set and Test Unseen Set are for the model evaluation. Training Set, Validation Set, and Test Seen Set are collected in the office:
 
 ![image](https://github.com/ysxu666/IMU-Indoor-Tracking/assets/70496853/b9fb91ef-57ca-4b59-a26e-aaf16cf511e6)
+
 And Test Unseen Set is collected in two large rooms:
+
+![image](https://github.com/ysxu666/IMU-Indoor-Tracking/assets/70496853/325e097f-2e90-445a-a2ce-eacc97d0475f)
+
 Each sequence of data lasts 3-6 minutes. The ratio of Training Set, Validation Set, Test Seen Set, and Test Unseen Set is 13:2:3:2.
 
 ## 2. Data Format
 The data is collected by Google Tango Phone. The raw data is stored in the format of 'hdf5'. Each file contains two parts: synced and pose. synced contains the raw data of IMU, and pose contains the ground truth of the robot's pose. The data format of synced is as follows:
-``
-synced
-├── gyro (gyroscope in body frame)
-├── acce (acceleration in body frame)
-├── magnet (magnetometer measured in body frame)
-├── linacce (acceleration without gravity in body frame)
-├── gravity (gravity in body frame)
-├── game_rv (game rotation vector)
-├── rv (rotation vector)
-├── time (time stamp)
-``
-The data format of pose is as follows:
-pose
-├── time (time stamp)
-├── tango_pos (position of the robot in navigation frame)
-├── tango_ori (orientation of the robot in navigation frame)
+
+
+![image](https://github.com/ysxu666/IMU-Indoor-Tracking/assets/70496853/456cdbfb-887a-489d-aba3-8c23e0114e9c)
+
 
 You can refer to the following links for more details about game rotation vector and rotation vector. In short, both game rotation vector and rotation vector can convert the data from the body frame to the navigation frame. The difference is that game rotation vector is calculated by the gyroscope and accelerometer, while rotation vector is calculated by the gyroscope, accelerometer, and magnetometer.
 
