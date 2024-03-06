@@ -43,3 +43,11 @@ To help you better get started with the project, we provide a baseline model for
 ![image](https://github.com/ysxu666/IMU-Indoor-Tracking/assets/70496853/ba2c0cc7-a729-41e7-9857-4f90ff13aae5)
 
 The workflow contains two parts, training and testing. In the training stage, we will first separate raw IMU data into multiple sequences with the same length. After that, the preprocessing methods are implemented, including noise filtering, coordinate transformation (from body frame to navigation frame), and data augmentation (random rotation on the floor plane). Then, the preprocessed data will be fed into the LSTM model for training. The csum in the loss function represents the cumulative sum of the velocity, which accounts for the position. In the testing stage, we didn't separate the raw IMU data into multiple sequences. Instead, we feed the whole sequence into the LSTM model and predict the trajectory. And we only apply the noise filtering and coordinate transformation in the testing stage. To measure the performance of the baseline model, we use four metrics: Absolute Trajectory Error (ATE), Relative Trajectory Error (RTE), Position Drift Error (PDE), and Absolute Yaw Error (AYE). You can refer to the evaluation part for more detail about these metrics.
+
+## References
+Here are some references to neural inertial tracking, which could help you handle your personal project more easily. You could also refer to these papers for your report.
+
+[1] Herath S, Yan H, Furukawa Y. Ronin: Robust neural inertial navigation in the wild: Benchmark, evaluations, & new methods[C]//2020 IEEE International Conference on Robotics and Automation (ICRA). IEEE, 2020: 3146-3152.
+
+[2] Sun S, Melamed D, Kitani K. IDOL: Inertial deep orientation-estimation and localization[C]//Proceedings of the AAAI Conference on Artificial Intelligence. 2021, 35(7): 6128-6137.
+
