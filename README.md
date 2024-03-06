@@ -8,13 +8,14 @@ In this personal project, we will focus on IMU-based indoor tracking for wheeled
 
 ## 1. Dataset Description
 The dataset contains four parts: Training Set, Validation Set, Test Seen Set, and Test Unseen Set. We will give you the raw data and ground truth of the Training Set and Validation Set for training the model. Only raw data from the Test Seen Set and Test Unseen Set are for the model evaluation. Training Set, Validation Set, and Test Seen Set are collected in the office:
+
 ![image](https://github.com/ysxu666/IMU-Indoor-Tracking/assets/70496853/b9fb91ef-57ca-4b59-a26e-aaf16cf511e6)
 And Test Unseen Set is collected in two large rooms:
 Each sequence of data lasts 3-6 minutes. The ratio of Training Set, Validation Set, Test Seen Set, and Test Unseen Set is 13:2:3:2.
 
 ## 2. Data Format
 The data is collected by Google Tango Phone. The raw data is stored in the format of 'hdf5'. Each file contains two parts: synced and pose. synced contains the raw data of IMU, and pose contains the ground truth of the robot's pose. The data format of synced is as follows:
-
+``
 synced
 ├── gyro (gyroscope in body frame)
 ├── acce (acceleration in body frame)
@@ -24,7 +25,7 @@ synced
 ├── game_rv (game rotation vector)
 ├── rv (rotation vector)
 ├── time (time stamp)
-
+``
 The data format of pose is as follows:
 pose
 ├── time (time stamp)
@@ -38,5 +39,7 @@ The problem is formulated as a regression problem. Given the raw data of IMU, we
 
 ## 4. System Workflow
 To help you better get started with the project, we provide a baseline model for you. The baseline model is a simple LSTM model. You can refer to the following figure for the system workflow:
+
 ![image](https://github.com/ysxu666/IMU-Indoor-Tracking/assets/70496853/ba2c0cc7-a729-41e7-9857-4f90ff13aae5)
+
 The workflow contains two parts, training and testing. In the training stage, we will first separate raw IMU data into multiple sequences with the same length. After that, the preprocessing methods are implemented, including noise filtering, coordinate transformation (from body frame to navigation frame), and data augmentation (random rotation on the floor plane). Then, the preprocessed data will be fed into the LSTM model for training. The csum in the loss function represents the cumulative sum of the velocity, which accounts for the position. In the testing stage, we didn't separate the raw IMU data into multiple sequences. Instead, we feed the whole sequence into the LSTM model and predict the trajectory. And we only apply the noise filtering and coordinate transformation in the testing stage. To measure the performance of the baseline model, we use four metrics: Absolute Trajectory Error (ATE), Relative Trajectory Error (RTE), Position Drift Error (PDE), and Absolute Yaw Error (AYE). You can refer to the evaluation part for more detail about these metrics.
