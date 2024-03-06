@@ -6,5 +6,5 @@ Indoor tracking is a crucial topic in our daily lives, whether it is for pedestr
 
 In this personal project, we will focus on IMU-based indoor tracking for wheeled robots. More details will be given below.
 
-##1. Dataset Description
+## 1. Dataset Description
 The dataset contains four parts: Training Set, Validation Set, Test Seen Set, and Test Unseen Set. We will give you the raw data and ground truth of the Training Set and Validation Set for training the model. Only raw data from the Test Seen Set and Test Unseen Set are for the model evaluation. Training Set, Validation Set, and Test Seen Set are collected in the office:
